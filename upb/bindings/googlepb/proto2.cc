@@ -89,6 +89,12 @@ using goog::scoped_ptr;
 
 // END DOUBLE COMPILATION TRICKERY. ////////////////////////////////////////////
 
+#if GOOGLE_PROTOBUF_VERSION >= 3002000
+#define PROTO3_SCHEMA schema_.
+#else
+#define PROTO3_SCHEMA
+#endif
+
 // Have to define this manually since older versions of proto2 didn't define
 // an enum value for STRING.
 #define UPB_CTYPE_STRING 0
@@ -231,7 +237,7 @@ case goog::FieldDescriptor::cpptype:                                           \
       const goog::internal::GeneratedMessageReflection* r) {
     // proto2 does not store hasbits for repeated fields.
     UPB_ASSERT(!f->is_repeated());
-    return (r->has_bits_offset_ * 8) + f->index();
+    return (r-> PROTO3_SCHEMA has_bits_offset_ * 8) + f->index();
   }
 
 #ifdef GOOGLE_PROTOBUF_HAS_ONEOF
@@ -239,7 +245,7 @@ case goog::FieldDescriptor::cpptype:                                           \
       const goog::FieldDescriptor* f,
       const goog::internal::GeneratedMessageReflection* r) {
     UPB_ASSERT(f->containing_oneof());
-    return r->oneof_case_offset_ + f->containing_oneof()->index();
+    return r-> PROTO3_SCHEMA oneof_case_offset_ + f->containing_oneof()->index();
   }
 #endif
 
@@ -253,7 +259,7 @@ case goog::FieldDescriptor::cpptype:                                           \
           f->containing_type()->field_count() + f->containing_oneof()->index();
     }
 #endif
-    return r->offsets_[index];
+    return r-> PROTO3_SCHEMA offsets_[index];
   }
 
   // Base class that provides access to elements of the message as a whole, such
@@ -262,10 +268,16 @@ case goog::FieldDescriptor::cpptype:                                           \
   class FieldDataBase {
    public:
     FieldDataBase(const goog::internal::GeneratedMessageReflection* r)
+#if GOOGLE_PROTOBUF_VERSION >= 3002000
+        : unknown_fields_offset_(goog::internal::GeneratedMessageReflection::
+                                 kUnknownFieldSetInMetadata)
+        , arena_offset_(r->schema_.metadata_offset_)
+#else
         : unknown_fields_offset_(r->unknown_fields_offset_)
 #ifdef GOOGLE_PROTOBUF_HAS_ARENAS
         , arena_offset_(r->arena_offset_)
 #endif  // GOOGLE_PROTOBUF_HAS_ARENAS
+#endif
     {}
 
 #ifdef GOOGLE_PROTOBUF_HAS_ARENAS
@@ -506,7 +518,7 @@ case goog::FieldDescriptor::cpptype:                                           \
     ExtensionFieldData(
         const goog::FieldDescriptor* proto2_f,
         const goog::internal::GeneratedMessageReflection* r)
-        : offset_(r->extensions_offset_),
+        : offset_(r-> PROTO3_SCHEMA extensions_offset_),
           field_descriptor_(proto2_f) {
     }
 
@@ -727,7 +739,7 @@ case goog::FieldDescriptor::cpptype:                                           \
     StringHandlerData(const goog::FieldDescriptor* proto2_f,
                       const goog::internal::GeneratedMessageReflection* r)
         : FieldOffset(proto2_f, r),
-          prototype_(*GetConstPointer<T*>(r->default_instance_,
+          prototype_(*GetConstPointer<T*>(r-> PROTO3_SCHEMA default_instance_,
                                           GetOffset(proto2_f, r))) {}
 
     const T* prototype() const { return prototype_; }
