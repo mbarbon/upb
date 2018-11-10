@@ -83,7 +83,11 @@ using goog::int32;
 using goog::int64;
 using goog::uint32;
 using goog::uint64;
+#if GOOGLE_PROTOBUF_VERSION >= 3006000
+template<class T> using scoped_ptr = std::unique_ptr<T>;
+#else
 using goog::scoped_ptr;
+#endif
 
 #endif  // ifdef UPB_GOOGLE3
 
