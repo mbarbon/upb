@@ -819,7 +819,8 @@ void upb_oneof_iter_setdone(upb_oneof_iter *iter) {
   upb_inttable_iter_setdone(iter);
 }
 
-void upb_oneof_iter_isequal(upb_oneof_iter *iter1, upb_oneof_iter *iter2) {
+void upb_oneof_iter_isequal(const upb_oneof_iter *iter1,
+                            const upb_oneof_iter *iter2) {
   upb_inttable_iter_isequal(iter1, iter2);
 }
 
