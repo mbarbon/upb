@@ -819,8 +819,8 @@ void upb_oneof_iter_setdone(upb_oneof_iter *iter) {
   upb_inttable_iter_setdone(iter);
 }
 
-void upb_oneof_iter_isequal(upb_oneof_iter *iter) {
-  upb_inttable_iter_isequal(iter);
+void upb_oneof_iter_isequal(upb_oneof_iter *iter1, upb_oneof_iter *iter2) {
+  upb_inttable_iter_isequal(iter1, iter2);
 }
 
 /* Code to build defs from descriptor protos. *********************************/
