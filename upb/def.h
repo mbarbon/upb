@@ -673,6 +673,10 @@ inline upb::MessageDefPtr upb::OneofDefPtr::containing_type() const {
 
 /* upb_enumdef ****************************************************************/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef upb_strtable_iter upb_enum_iter;
 
 const char *upb_enumdef_fullname(const upb_enumdef *e);
@@ -706,6 +710,7 @@ const char *upb_enum_iter_name(upb_enum_iter *iter);
 int32_t upb_enum_iter_number(upb_enum_iter *iter);
 
 #ifdef __cplusplus
+}  /* extern "C" */
 
 class upb::EnumDefPtr {
  public:
