@@ -89,6 +89,9 @@ const MessageDef* DefBuilder::GetMaybeUnfrozenMessageDef(
 
 #if GOOGLE_PROTOBUF_VERSION >= 3000000
   upb_msgdef_setmapentry(md, d->options().map_entry());
+  if (d->file()->syntax() == goog::FileDescriptor::SYNTAX_PROTO3) {
+    upb_msgdef_setsyntax(md, UPB_SYNTAX_PROTO3);
+  }
 #endif
   // Find all regular fields and extensions for this message.
   std::vector<const goog::FieldDescriptor*> fields;
