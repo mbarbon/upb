@@ -8,6 +8,8 @@
 // and protobuf opensource both in a single binary without the two conflicting.
 // However we must be careful not to violate the ODR.
 
+#ifndef UPB_GOOGLEPB_NOREFLECTION
+
 #include "upb/bindings/googlepb/proto2.int.h"
 
 #include <map>
@@ -1409,3 +1411,5 @@ const goog::Message* GetProto2FieldPrototype(const goog::Message& m,
 
 }  // namespace googlepb
 }  // namespace upb
+
+#endif // UPB_GOOGLEPB_NOREFLECTION

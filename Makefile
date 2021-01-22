@@ -367,6 +367,7 @@ test:
 upb_bindings_googlepb_SRCS = \
   upb/bindings/googlepb/bridge.cc \
   upb/bindings/googlepb/proto2.cc \
+  upb/bindings/googlepb/noreflection.cc \
 
 GOOGLEPB_TESTS = \
   tests/bindings/googlepb/test_vs_proto2.googlemessage1 \
