@@ -310,16 +310,5 @@ const Handlers* CodeCache::GetWriteHandlers(const goog::Message& m) {
   return ret;
 }
 
-const ::google::protobuf::Message* GetProto2FieldPrototype(
-    const ::google::protobuf::Message& m,
-    const ::google::protobuf::FieldDescriptor* f) {
-  throw std::exception();
-}
-
-bool TrySetWriteHandlers(const ::google::protobuf::FieldDescriptor* proto2_f,
-                         const ::google::protobuf::Message& prototype,
-                         const upb::FieldDef* upb_f, upb::Handlers* h) {
-  throw std::exception();
-}
 }  // namespace googlepb
 }  // namespace upb
