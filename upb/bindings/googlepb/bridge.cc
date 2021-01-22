@@ -318,7 +318,7 @@ const ::google::protobuf::Message* GetProto2FieldPrototype(
 
 bool TrySetWriteHandlers(const ::google::protobuf::FieldDescriptor* proto2_f,
                          const ::google::protobuf::Message& prototype,
-                         const upb::FieldDef* upb_f, upb::Handlers* h);
+                         const upb::FieldDef* upb_f, upb::Handlers* h) {
   throw std::exception();
 }
 }  // namespace googlepb
