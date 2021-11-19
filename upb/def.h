@@ -677,6 +677,9 @@ bool upb_fielddef_checktype(int32_t type);
 bool upb_fielddef_checkdescriptortype(int32_t type);
 bool upb_fielddef_checkintfmt(int32_t fmt);
 
+void upb_fielddef_setproto3optional(upb_fielddef *f, bool is_proto3_optional);
+bool upb_fielddef_proto3optional(const upb_fielddef *f);
+
 UPB_END_EXTERN_C
 
 

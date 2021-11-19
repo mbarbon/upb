@@ -82,6 +82,7 @@ struct upb_fielddef {
   uint32_t number_;
   uint32_t selector_base;  /* Used to index into a upb::Handlers table. */
   uint32_t index_;
+  bool is_proto3_optional;
 };
 
 extern const struct upb_refcounted_vtbl upb_fielddef_vtbl;

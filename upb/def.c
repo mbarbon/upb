@@ -1378,6 +1378,15 @@ bool upb_fielddef_checkdescriptortype(int32_t type) {
   return between(type, 1, 18);
 }
 
+void upb_fielddef_setproto3optional(upb_fielddef *f, bool is_proto3_optional) {
+  UPB_ASSERT(!upb_fielddef_isfrozen(f));
+  f->is_proto3_optional = is_proto3_optional;
+}
+
+bool upb_fielddef_proto3optional(const upb_fielddef *f) {
+  return f->is_proto3_optional;
+}
+
 /* upb_msgdef *****************************************************************/
 
 static void visitmsg(const upb_refcounted *r, upb_refcounted_visit *visit,
