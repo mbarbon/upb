@@ -30,7 +30,7 @@ static void freehandlers(upb_refcounted *r) {
   for(; !upb_inttable_done(&i); upb_inttable_next(&i)) {
     void *val = (void*)upb_inttable_iter_key(&i);
     upb_value func_val = upb_inttable_iter_value(&i);
-    upb_handlerfree *func = upb_value_getfptr(func_val);
+    upb_handlerfree *func = (upb_handlerfree*) upb_value_getfptr(func_val);
     func(val);
   }
 
@@ -432,7 +432,7 @@ bool upb_handlers_addcleanup(upb_handlers *h, void *p, upb_handlerfree *func) {
   if (upb_inttable_lookupptr(&h->cleanup_, p, NULL)) {
     return false;
   }
-  ok = upb_inttable_insertptr(&h->cleanup_, p, upb_value_fptr(func));
+  ok = upb_inttable_insertptr(&h->cleanup_, p, upb_value_fptr((upb_func*) func));
   UPB_ASSERT(ok);
   return true;
 }
