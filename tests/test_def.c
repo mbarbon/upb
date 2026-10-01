@@ -113,7 +113,7 @@ static void test_symbol_resolution() {
   upb_fielddef *m3_field1;
   upb_fielddef *m3_field2;
 
-  upb_symtab *symtab = upb_symtab_new(&symtab);
+  upb_symtab *symtab = upb_symtab_new();
   ASSERT(symtab);
 
   /* m1 has name "A.B.C" and no fields. We'll add it to the symtab now. */
@@ -209,7 +209,7 @@ static upb_msgdef *upb_msgdef_newnamed(const char *name, void *owner) {
 
 static void test_replacement_fails() {
   bool ok;
-  upb_symtab *s = upb_symtab_new(&s);
+  upb_symtab *s = upb_symtab_new();
   upb_status status = UPB_STATUS_INIT;
   upb_def *newdefs[2];
 
@@ -343,7 +343,7 @@ static void test_mapentry_check() {
   upb_status s = UPB_STATUS_INIT;
   upb_msgdef *m = upb_msgdef_new(&m);
   upb_fielddef *f = upb_fielddef_new(&f);
-  upb_symtab *symtab = upb_symtab_new(&symtab);
+  upb_symtab *symtab = upb_symtab_new();
   upb_msgdef *subm = upb_msgdef_new(&subm);
   upb_def *defs[2];
 
@@ -379,7 +379,7 @@ static void test_oneofs() {
   upb_status s = UPB_STATUS_INIT;
   bool ok = true;
   upb_def *subm_defs[1];
-  upb_symtab *symtab = upb_symtab_new(&symtab);
+  upb_symtab *symtab = upb_symtab_new();
   upb_msgdef *subm = upb_msgdef_newnamed("SubMessage", &symtab);
   upb_msgdef *m = upb_msgdef_newnamed("TestMessage", &symtab);
   upb_oneofdef *o = upb_oneofdef_new(&o);
